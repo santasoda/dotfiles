@@ -149,6 +149,8 @@ source $ZSH/oh-my-zsh.sh
 
 # --- JetBrains Toolbox Scripts ---
 export PATH="$PATH:$HOME/Library/Application Support/JetBrains/Toolbox/scripts"
+# --- Antigravity Scripts ---
+export PATH="$HOME/.antigravity/antigravity/bin:$PATH"
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -215,8 +217,9 @@ function _open_editor() {
 
     echo "Launching editor..."
     case "$editor_flag" in
-        c|v|vs|code)    code . ;;
-        cur|cursor) cursor . ;;
+        v|vs|vsc|code)    code . ;;
+        c|cur|cursor) cursor . ;;
+        a|ag|anti|antigravity) antigravity . ;;
         p|py|charm)
             if command -v charm &> /dev/null; then charm .
             elif command -v pycharm &> /dev/null; then pycharm .
