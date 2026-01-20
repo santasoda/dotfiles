@@ -50,9 +50,10 @@ fi
 export ZSH="$HOME/.oh-my-zsh"
 
 # ==============================================================================
-# 🚀 INITIAL SETUP: Fonts (Maple Mono NF CN)
+# 🚀 INITIAL SETUP: Fonts
 # Required for icons to render correctly in P10k.
-# Install: brew install font-maple-mono-nf-cn
+# install: brew install --cask font-maple-mono-nf-cn
+#          brew install --cask font-lxgw-wenkai
 # ⚠️ Note: Open Terminal Settings (Cmd + ,) -> Profiles -> Text -> Font to select it!
 # ==============================================================================
 
@@ -62,11 +63,15 @@ export ZSH="$HOME/.oh-my-zsh"
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 
 # ==============================================================================
-# 🚀 INITIAL SETUP: Theme (Powerlevel10k)
-# Run this command if p10k is missing:
-# git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
+# 🚀 INITIAL SETUP: Theme (Powerlevel10k via Homebrew)
+# install: brew install powerlevel10k
+# repo: https://github.com/romkatv/powerlevel10k.git 
 # ==============================================================================
-ZSH_THEME="powerlevel10k/powerlevel10k"
+if [[ -r "$(brew --prefix)/share/powerlevel10k/powerlevel10k.zsh-theme" ]]; then
+  source "$(brew --prefix)/share/powerlevel10k/powerlevel10k.zsh-theme"
+else
+  ZSH_THEME="robbyrussell"
+fi
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -137,11 +142,27 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # ==============================================================================
 plugins=(
   git
-  zsh-autosuggestions
-  zsh-syntax-highlighting
   z
   extract
 )
+
+# ==============================================================================
+# 🚀 INITIAL SETUP: Plugins
+# Run these commands if plugins are missing:
+# install: brew install zsh-autosuggestions 
+#          brew install zsh-syntax-highlighting
+# repo: https://github.com/zsh-users/zsh-autosuggestions
+#.      https://github.com/zsh-users/zsh-syntax-highlighting.git
+# ==============================================================================
+HOMEBREW_PREFIX=$(brew --prefix)
+
+if [[ -f "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]]; then
+  source "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+fi
+
+if [[ -f "$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
+  source "$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+fi
 
 source $ZSH/oh-my-zsh.sh
 
@@ -196,6 +217,12 @@ alias rm="trash"
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # ==============================================
+# 🚀 INITIAL SETUP: opencode
+# install: brew install anomalyco/tap/opencode
+# repo: https://github.com/anomalyco/opencode
+# ==============================================
+
+# ==============================================
 # Research & Engineering Workflow Config
 # ==============================================
 
@@ -220,6 +247,7 @@ function _open_editor() {
         v|vs|vsc|code)    code . ;;
         c|cur|cursor) cursor . ;;
         a|ag|anti|antigravity) antigravity . ;;
+        o|op|open|opencode) opencode . ;;
         p|py|charm)
             if command -v charm &> /dev/null; then charm .
             elif command -v pycharm &> /dev/null; then pycharm .
