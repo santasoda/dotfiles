@@ -240,9 +240,8 @@ function _open_editor() {
     local editor_flag="$1"
     
     # If no flag provided, do nothing (stay in terminal)
-    if [ -z "$editor_flag" ]; then return; fi
+    if [ -z "$editor_flag" ]; then return 1; fi
 
-    echo "Launching editor..."
     case "$editor_flag" in
         v|vs|vsc|code)    code . ;;
         c|cur|cursor) cursor . ;;
@@ -253,7 +252,10 @@ function _open_editor() {
             elif command -v pycharm &> /dev/null; then pycharm .
             else open -a "PyCharm" .; fi
             ;;
-        *) echo "Unknown editor flag: $editor_flag (Use v, c, or p)" ;;
+        *) 
+            echo "Unknown editor flag: $editor_flag (Use v, c, a, o, or p)"
+            return 1
+            ;;
     esac
 }
 
@@ -400,7 +402,10 @@ function dot() {
         return
     fi
 
-    # Case C: Pass-through any other git commands
+    # Case C: Editor flag -> Open dotfiles in editor
+    _open_editor "$1" && { cd - > /dev/null; return; }
+
+    # Case D: Pass-through any other git commands
     git "$@"
     
     # Return to original directory
