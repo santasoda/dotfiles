@@ -173,6 +173,36 @@ export PATH="$PATH:$HOME/Library/Application Support/JetBrains/Toolbox/scripts"
 # --- Antigravity Scripts ---
 export PATH="$HOME/.antigravity/antigravity/bin:$PATH"
 
+# ==============================================================================
+# 🚀 INITIAL SETUP: node
+# install: brew install node
+# ==============================================================================
+export PATH="/opt/homebrew/opt/node@24/bin:$PATH"
+
+# ==============================================================================
+# 🚀 INITIAL SETUP: Ollama
+# usage: launchctl setenv OLLAMA_ORIGINS "*"
+# ==============================================================================
+
+
+# ==============================================================================
+# 🚀 INITIAL SETUP: Obsidian
+# ==============================================================================
+export PATH="$PATH:/Applications/Obsidian.app/Contents/MacOS"
+
+
+# ==============================================================================
+# 🚀 INITIAL SETUP: LLM
+# install: npm i -g @openai/codex
+#          npm i -g oh-my-codex
+#          npm i -g @google/gemini-cli
+# upgrade: npm i -g @openai/codex@latest
+#          npm i -g oh-my-codex@latest
+#          npm i -g @google/gemini-cli@latest
+# ==============================================================================
+export PATH="$HOME/.local/bin:$PATH"
+
+
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
